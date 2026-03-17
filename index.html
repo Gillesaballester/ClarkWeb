@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -998,24 +997,24 @@
       </div>
 
       <div>
-        <form id="contactForm">
+        <form id="contactForm" action="https://formspree.io/f/xgonpdqo" method="POST">
           <div class="form-row">
             <div class="form-group">
               <label>Votre prénom</label>
-              <input type="text" placeholder="Jean" required />
+              <input type="text" name="prenom" placeholder="Jean" required />
             </div>
             <div class="form-group">
               <label>Votre commerce</label>
-              <input type="text" placeholder="Boulangerie Martin" />
+              <input type="text" name="commerce" placeholder="Boulangerie Martin" />
             </div>
           </div>
           <div class="form-group">
             <label>Téléphone ou email</label>
-            <input type="text" placeholder="06 00 00 00 00" required />
+            <input type="text" name="contact" placeholder="06 00 00 00 00" required />
           </div>
           <div class="form-group">
             <label>Formule souhaitée</label>
-            <select>
+            <select name="formule">
               <option value="">Je ne sais pas encore</option>
               <option>Site Vitrine — 600€</option>
               <option>Site Vitrine+ — 800€</option>
@@ -1024,7 +1023,7 @@
           </div>
           <div class="form-group">
             <label>Votre message</label>
-            <textarea placeholder="Décrivez votre commerce et ce que vous recherchez..."></textarea>
+            <textarea name="message" placeholder="Décrivez votre commerce et ce que vous recherchez..."></textarea>
           </div>
           <button type="submit" class="form-submit">Envoyer ma demande →</button>
           <div id="form-success">✓ Message envoyé — je vous recontacte sous 24h !</div>
@@ -1088,13 +1087,26 @@
   });
 
 
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    document.getElementById('form-success').style.display = 'block';
-    this.reset();
-    setTimeout(() => {
-      document.getElementById('form-success').style.display = 'none';
-    }, 5000);
+    const form = this;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('form-success').style.display = 'block';
+        form.reset();
+        setTimeout(() => {
+          document.getElementById('form-success').style.display = 'none';
+        }, 5000);
+      }
+    } catch(err) {
+      console.error(err);
+    }
   });
 </script>
 </body>
