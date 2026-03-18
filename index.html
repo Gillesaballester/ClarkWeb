@@ -138,17 +138,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 5rem;
+      padding: 0.6rem 5rem;
       opacity: 0;
-      transition: opacity 0.6s ease 0.2s;
+      transition: opacity 0.6s ease 0.2s, background 0.4s ease, backdrop-filter 0.4s ease;
+      background: transparent;
     }
     nav.visible { opacity: 1; }
-    nav::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 5rem; right: 5rem;
-      height: 1px;
-      background: var(--marble-mid);
+    nav.scrolled {
+      background: rgba(240, 237, 232, 0.75);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -1163,6 +1162,16 @@
         }, { once: true });
       }, 500);
     }, 1200);
+  });
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   });
 
   // Scroll reveal
