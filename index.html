@@ -184,9 +184,9 @@
     /* ===================== HERO ===================== */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
       padding: 0 5rem 6rem;
       position: relative;
       z-index: 1;
@@ -194,6 +194,24 @@
       transition: opacity 0.8s ease;
     }
     .hero.visible { opacity: 1; }
+    .hero-left { display: flex; flex-direction: column; justify-content: flex-end; }
+
+    .hero-graphic {
+      position: relative;
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-graphic svg {
+      width: 100%;
+      max-width: 480px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease 0.5s, transform 1.2s ease 0.5s;
+    }
+    .hero.visible .hero-graphic svg { opacity: 1; transform: translateY(0); }
 
     .hero-eyebrow {
       font-size: 0.65rem;
@@ -694,7 +712,8 @@
       nav { padding: 1.5rem 2rem; }
       nav::after { left: 2rem; right: 2rem; }
       nav ul { display: none; }
-      .hero { padding: 0 2rem 5rem; }
+      .hero { grid-template-columns: 1fr; padding: 0 2rem 5rem; }
+      .hero-graphic { display: none; }
       .hero-scroll { display: none; }
       .section-inner { padding: 5rem 2rem; }
       .divider { margin: 0 2rem; }
@@ -737,12 +756,58 @@
 <!-- ===================== HERO ===================== -->
 <section>
   <div class="hero" id="hero">
-    <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant</p>
-    <h1 class="hero-title">Votre commerce mérite<br>un site à la hauteur<br>de votre <em>ambition.</em></h1>
-    <div class="hero-bottom">
-      <p class="hero-desc">Je crée des sites internet modernes et efficaces pour les commerces locaux. Rapide, abordable, sans jargon.</p>
-      <a href="#offres" class="hero-btn">Découvrir les offres →</a>
+    <div class="hero-left">
+      <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant</p>
+      <h1 class="hero-title">Votre commerce mérite<br>un site à la hauteur<br>de votre <em>ambition.</em></h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">Je crée des sites internet modernes et efficaces pour les commerces locaux. Rapide, abordable, sans jargon.</p>
+        <a href="#offres" class="hero-btn">Découvrir les offres →</a>
+      </div>
     </div>
+
+    <div class="hero-graphic">
+      <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;">
+        <defs>
+          <radialGradient id="grid-mask" cx="50%" cy="52%" r="45%">
+            <stop offset="0%" stop-color="white" stop-opacity="1"/>
+            <stop offset="55%" stop-color="white" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </radialGradient>
+          <mask id="fade-mask">
+            <rect x="0" y="0" width="520" height="480" fill="url(#grid-mask)"/>
+          </mask>
+        </defs>
+
+        <!-- Quadrillage identique au body::before mais plus foncé, masqué en fondu -->
+        <g mask="url(#fade-mask)">
+          <!-- Angle 105deg -->
+          <line x1="-100" y1="0" x2="620" y2="260" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="80" x2="620" y2="340" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="160" x2="620" y2="420" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="240" x2="620" y2="500" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="-80" x2="620" y2="180" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="-160" x2="620" y2="100" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <line x1="-100" y1="320" x2="620" y2="580" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+          <!-- Angle -15deg -->
+          <line x1="0" y1="-30" x2="520" y2="105" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+          <line x1="0" y1="90" x2="520" y2="225" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+          <line x1="0" y1="210" x2="520" y2="345" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+          <line x1="0" y1="330" x2="520" y2="465" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+          <line x1="0" y1="450" x2="520" y2="585" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+        </g>
+
+        <!-- Texte -->
+        <text x="260" y="188" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="400" font-size="22" fill="#2a2925" opacity="0.5" letter-spacing="10">YOUR IDEA</text>
+        <text x="260" y="258" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="70" fill="#111110" opacity="0.75" letter-spacing="0">Our Work.</text>
+        <text x="260" y="318" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="300" font-size="14" fill="#4a4840" opacity="0.45" letter-spacing="10" font-style="italic">the best result.</text>
+
+        <!-- Point décoratif -->
+        <circle cx="260" cy="352" r="2" fill="#b8a98a" opacity="0.5"/>
+        <line x1="200" y1="352" x2="252" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
+        <line x1="268" y1="352" x2="320" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+    </div>
+
     <div class="hero-scroll">Défiler</div>
   </div>
 </section>
