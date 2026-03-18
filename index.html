@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClarkWeb — Création de sites internet à Vesoul</title>
+  <title>ClarkWeb — Création de sites internet pour commerces locaux</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23111110'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='42' fill='%23f0ede8'%3ECW%3C/text%3E%3C/svg%3E" />
   <style>
@@ -90,15 +90,22 @@
       line-height: 1;
       position: relative;
       z-index: 1;
-      overflow: hidden;
     }
     .intro-title span {
       display: block;
       transform: translateY(110%);
       animation: introReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     }
+    .intro-title span.exit {
+      animation: introExit 0.5s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+    }
     @keyframes introReveal {
       to { transform: translateY(0); }
+    }
+    @keyframes introExit {
+      0% { transform: translateY(0) scaleY(1); opacity: 1; }
+      30% { transform: translateY(-10%) scaleY(1.2); opacity: 1; }
+      100% { transform: translateY(-600%) scaleY(0.1); opacity: 0; }
     }
     .intro-line {
       position: absolute;
@@ -112,13 +119,14 @@
       z-index: 1;
       opacity: 0;
       animation: fadeIn 0.8s ease 1.2s forwards;
+      transition: opacity 0.3s ease;
     }
     #intro.hide {
-      animation: introFade 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+      animation: introFade 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.5s forwards;
     }
     @keyframes introFade {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.04); pointer-events: none; }
+      0% { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
     }
 
     /* ===================== NAV ===================== */
@@ -602,8 +610,10 @@
       color: var(--marble);
       outline: none;
       transition: border-color 0.3s;
-      cursor: none;
+      cursor: text;
     }
+    .form-group select { cursor: pointer; }
+    .form-submit { cursor: pointer; }
     .form-group input::placeholder,
     .form-group textarea::placeholder { color: rgba(240,237,232,0.2); }
     .form-group select option { background: var(--black); }
@@ -708,7 +718,7 @@
   <div class="intro-title">
     <span>ClarkWeb</span>
   </div>
-  <p class="intro-line">Création de sites internet — Vesoul</p>
+  <p class="intro-line">Création de sites internet pour commerces locaux</p>
 </div>
 
 <!-- ===================== NAV ===================== -->
@@ -725,10 +735,10 @@
 <!-- ===================== HERO ===================== -->
 <section>
   <div class="hero" id="hero">
-    <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant — Vesoul, Haute-Saône</p>
+    <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant</p>
     <h1 class="hero-title">Votre commerce mérite<br>un site à la hauteur<br>de votre <em>ambition.</em></h1>
     <div class="hero-bottom">
-      <p class="hero-desc">Je crée des sites internet modernes et efficaces pour les commerces locaux de Vesoul et ses environs. Rapide, abordable, sans jargon.</p>
+      <p class="hero-desc">Je crée des sites internet modernes et efficaces pour les commerces locaux. Rapide, abordable, sans jargon.</p>
       <a href="#offres" class="hero-btn">Découvrir les offres →</a>
     </div>
     <div class="hero-scroll">Défiler</div>
@@ -904,13 +914,13 @@
       <div class="about-visual reveal">
         <div class="about-box"></div>
         <div class="about-initials">GB</div>
-        <div class="about-tag">Vesoul — 70000</div>
+        <div class="about-tag">Depuis 2025</div>
       </div>
       <div class="about-text">
         <p class="label reveal">Qui suis-je ?</p>
         <h2 class="section-title reveal">Gilles Ballester,<br><em>votre développeur</em><br>de proximité.</h2>
         <p class="about-body reveal">
-          J'ai 18 ans, je suis en BTS à Vesoul et j'ai une conviction simple : <strong>trop de commerces locaux perdent des clients chaque jour</strong> faute d'une présence en ligne digne de ce nom.<br><br>
+          J'ai 18 ans et j'ai une conviction simple : <strong>trop de commerces locaux perdent des clients chaque jour</strong> faute d'une présence en ligne digne de ce nom.<br><br>
           Je ne suis pas une agence parisienne qui facture 5 000€ pour un site que vous ne comprendrez jamais. Je suis <strong>quelqu'un de la région</strong>, joignable, disponible, et qui livre des sites modernes à des tarifs accessibles.
         </p>
         <div class="about-stats reveal">
@@ -924,7 +934,7 @@
           </div>
           <div>
             <span class="stat-n">Local</span>
-            <span class="stat-l">Vesoul & alentours</span>
+            <span class="stat-l">Partout en France</span>
           </div>
         </div>
       </div>
@@ -990,7 +1000,7 @@
           <div class="contact-icon">⌖</div>
           <div class="contact-detail">
             <strong>Zone d'intervention</strong>
-            <span>Vesoul & Haute-Saône (70)</span>
+            <span>France entière — déplacement possible</span>
           </div>
         </div>
         <p class="contact-note">
@@ -1039,7 +1049,7 @@
 <footer>
   <div class="footer-logo">ClarkWeb</div>
   <p class="footer-copy">© 2025 Gilles Ballester — Tous droits réservés</p>
-  <p class="footer-location">Vesoul, Haute-Saône (70)</p>
+  <p class="footer-location">France entière</p>
 </footer>
 
 <script>
@@ -1049,12 +1059,20 @@
   window.addEventListener('load', () => {
     setTimeout(() => {
       const intro = document.getElementById('intro');
-      intro.classList.add('hide');
-      intro.addEventListener('animationend', () => {
-        intro.style.display = 'none';
-        document.getElementById('nav').classList.add('visible');
-        document.getElementById('hero').classList.add('visible');
-      });
+      const span = intro.querySelector('.intro-title span');
+      const line = intro.querySelector('.intro-line');
+      // Slide text out first
+      span.classList.add('exit');
+      if (line) line.style.opacity = '0';
+      // Then fade the whole intro
+      setTimeout(() => {
+        intro.classList.add('hide');
+        intro.addEventListener('animationend', () => {
+          intro.style.display = 'none';
+          document.getElementById('nav').classList.add('visible');
+          document.getElementById('hero').classList.add('visible');
+        }, { once: true });
+      }, 500);
     }, 2200);
   });
 
