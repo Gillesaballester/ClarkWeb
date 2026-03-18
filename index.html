@@ -72,7 +72,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
     #intro::before {
       content: '';
@@ -93,18 +92,21 @@
     }
     .intro-title span {
       display: block;
-      transform: translateY(110%);
-      animation: introReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      transform: translateY(600%) scaleY(0.1);
+      opacity: 0;
+      animation: introReveal 0.5s cubic-bezier(0.55, 0, 1, 0.45) 0.2s forwards;
     }
     .intro-title span.exit {
       animation: introExit 0.5s cubic-bezier(0.55, 0, 1, 0.45) forwards;
     }
     @keyframes introReveal {
-      to { transform: translateY(0); }
+      0% { transform: translateY(600%) scaleY(0.1); opacity: 0; }
+      60% { transform: translateY(10%) scaleY(1.2); opacity: 1; }
+      100% { transform: translateY(0) scaleY(1); opacity: 1; }
     }
     @keyframes introExit {
       0% { transform: translateY(0) scaleY(1); opacity: 1; }
-      30% { transform: translateY(-10%) scaleY(1.2); opacity: 1; }
+      40% { transform: translateY(-10%) scaleY(1.2); opacity: 1; }
       100% { transform: translateY(-600%) scaleY(0.1); opacity: 0; }
     }
     .intro-line {
@@ -1073,7 +1075,7 @@
           document.getElementById('hero').classList.add('visible');
         }, { once: true });
       }, 500);
-    }, 2200);
+    }, 1000);
   });
 
   // Scroll reveal
