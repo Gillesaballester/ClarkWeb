@@ -46,38 +46,21 @@
       overflow-x: hidden;
     }
 
-    /* MARBLE TEXTURE via SVG filter */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        repeating-linear-gradient(
-          105deg,
-          transparent,
-          transparent 80px,
-          rgba(180,170,155,0.08) 80px,
-          rgba(180,170,155,0.08) 81px
-        ),
-        repeating-linear-gradient(
-          -15deg,
-          transparent,
-          transparent 120px,
-          rgba(160,150,135,0.06) 120px,
-          rgba(160,150,135,0.06) 121px
-        ),
-        repeating-linear-gradient(
-          60deg,
-          transparent,
-          transparent 200px,
-          rgba(200,190,175,0.04) 200px,
-          rgba(200,190,175,0.04) 202px
-        );
+        repeating-linear-gradient(105deg, transparent, transparent 80px, rgba(180,170,155,0.08) 80px, rgba(180,170,155,0.08) 81px),
+        repeating-linear-gradient(-15deg, transparent, transparent 120px, rgba(160,150,135,0.06) 120px, rgba(160,150,135,0.06) 121px),
+        repeating-linear-gradient(60deg, transparent, transparent 200px, rgba(200,190,175,0.04) 200px, rgba(200,190,175,0.04) 202px);
       pointer-events: none;
       z-index: 0;
     }
 
-
+    /* ===================== VIEWS SYSTEM ===================== */
+    .view { display: none; }
+    .view.active { display: block; }
 
     /* ===================== INTRO SCREEN ===================== */
     #intro {
@@ -137,7 +120,6 @@
       z-index: 1;
       opacity: 0;
       animation: fadeIn 0.8s ease 1.2s forwards;
-      transition: opacity 0.3s ease;
     }
     #intro.hide {
       animation: introFade 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.5s forwards;
@@ -172,6 +154,7 @@
       color: var(--black);
       text-decoration: none;
       letter-spacing: 0.05em;
+      cursor: pointer;
     }
     nav ul {
       display: flex; gap: 3rem;
@@ -185,6 +168,7 @@
       text-transform: uppercase;
       opacity: 0.6;
       transition: opacity 0.3s;
+      cursor: pointer;
     }
     nav ul a:hover { opacity: 1; }
     .nav-cta {
@@ -210,7 +194,6 @@
     }
     .hero.visible { opacity: 1; }
     .hero-left { display: flex; flex-direction: column; justify-content: flex-end; }
-
     .hero-graphic {
       position: relative;
       height: 100%;
@@ -227,7 +210,6 @@
       transition: opacity 1.2s ease 0.5s, transform 1.2s ease 0.5s;
     }
     .hero.visible .hero-graphic svg { opacity: 1; transform: translateY(0); }
-
     .hero-eyebrow {
       font-size: 0.65rem;
       letter-spacing: 0.35em;
@@ -244,10 +226,7 @@
       max-width: 800px;
       margin-bottom: 3rem;
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    .hero-title em { font-style: italic; color: var(--gold); }
     .hero-bottom {
       display: flex;
       align-items: flex-end;
@@ -273,7 +252,6 @@
       transition: background 0.3s, gap 0.3s;
     }
     .hero-btn:hover { background: var(--ink); gap: 1.5rem; }
-
     .hero-scroll {
       position: absolute;
       right: 5rem;
@@ -318,11 +296,7 @@
       gap: 2rem;
       margin-bottom: 2.5rem;
     }
-    .separator-line {
-      flex: 1;
-      height: 1px;
-      background: var(--marble-mid);
-    }
+    .separator-line { flex: 1; height: 1px; background: var(--marble-mid); }
     .label-large {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -358,10 +332,7 @@
       overflow: hidden;
     }
     .offer-card:hover { background: var(--marble-dark); }
-    .offer-card.featured {
-      background: var(--black);
-      color: var(--marble);
-    }
+    .offer-card.featured { background: var(--black); color: var(--marble); }
     .offer-card.featured:hover { background: var(--ink); }
     .offer-badge {
       display: inline-block;
@@ -373,443 +344,234 @@
       padding: 0.3rem 0.8rem;
       margin-bottom: 2rem;
     }
-    .offer-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-    .offer-price {
-      font-size: 2.5rem;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      color: var(--black);
-    }
+    .offer-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .offer-price { font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 0.3rem; color: var(--black); }
     .offer-card.featured .offer-price { color: var(--marble); }
-    .offer-price-sub {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--gray);
-      margin-bottom: 2.5rem;
-    }
+    .offer-price-sub { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gray); margin-bottom: 2.5rem; }
     .offer-card.featured .offer-price-sub { color: rgba(240,237,232,0.5); }
-    .offer-features {
-      list-style: none;
-      margin-bottom: 3rem;
-    }
+    .offer-features { list-style: none; margin-bottom: 3rem; }
     .offer-features li {
-      font-size: 0.72rem;
-      line-height: 1.8;
-      color: var(--gray);
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--marble-mid);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      font-size: 0.72rem; line-height: 1.8; color: var(--gray);
+      padding: 0.5rem 0; border-bottom: 1px solid var(--marble-mid);
+      display: flex; align-items: center; gap: 0.75rem;
     }
-    .offer-card.featured .offer-features li {
-      color: rgba(240,237,232,0.65);
-      border-color: rgba(240,237,232,0.1);
-    }
-    .offer-features li::before {
-      content: '—';
-      color: var(--gold);
-      flex-shrink: 0;
-    }
+    .offer-card.featured .offer-features li { color: rgba(240,237,232,0.65); border-color: rgba(240,237,232,0.1); }
+    .offer-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
     .offer-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--black);
-      transition: gap 0.3s;
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--black); transition: gap 0.3s;
     }
     .offer-card.featured .offer-link { color: var(--marble); }
     .offer-link:hover { gap: 1.25rem; }
-
-    /* maintenance */
     .maintenance-band {
-      background: var(--marble-dark);
-      border: 1px solid var(--marble-mid);
-      margin-top: 1px;
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: var(--marble-dark); border: 1px solid var(--marble-mid);
+      margin-top: 1px; padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .maintenance-band .offer-name {
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .maintenance-band .offer-price {
-      font-size: 1.8rem;
-      margin-bottom: 0;
-    }
-    .maintenance-band p {
-      font-size: 0.7rem;
-      color: var(--gray);
-      max-width: 400px;
-      line-height: 1.8;
-    }
+    .maintenance-band .offer-name { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .maintenance-band .offer-price { font-size: 1.8rem; margin-bottom: 0; }
+    .maintenance-band p { font-size: 0.7rem; color: var(--gray); max-width: 400px; line-height: 1.8; }
 
     /* ===================== IMPACT ===================== */
     .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--marble-mid);
-      border: 1px solid var(--marble-mid);
-      margin-bottom: 2.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--marble-mid); border: 1px solid var(--marble-mid); margin-bottom: 2.5rem;
     }
-    .impact-card {
-      background: var(--marble);
-      padding: 2.5rem;
-      transition: background 0.3s;
-    }
+    .impact-card { background: var(--marble); padding: 2.5rem; transition: background 0.3s; }
     .impact-card:hover { background: var(--marble-dark); }
-    .impact-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--black);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .impact-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      color: var(--ink);
-      font-weight: 400;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .impact-desc {
-      font-size: 0.72rem;
-      line-height: 1.9;
-      color: var(--gray);
-      margin-bottom: 1.5rem;
-    }
+    .impact-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--black); line-height: 1; margin-bottom: 0.5rem; }
+    .impact-label { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink); font-weight: 400; margin-bottom: 1rem; line-height: 1.6; }
+    .impact-desc { font-size: 0.72rem; line-height: 1.9; color: var(--gray); margin-bottom: 1.5rem; }
     .impact-bar-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
-    .impact-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.62rem;
-      color: var(--gray);
-      letter-spacing: 0.05em;
-    }
-    .impact-bar {
-      height: 4px;
-      background: var(--marble-mid);
-      width: 100%;
-    }
-    .impact-bar-fill {
-      height: 100%;
-      background: var(--ink);
-      transition: width 1s ease;
-    }
+    .impact-bar-label { display: flex; justify-content: space-between; font-size: 0.62rem; color: var(--gray); letter-spacing: 0.05em; }
+    .impact-bar { height: 4px; background: var(--marble-mid); width: 100%; }
+    .impact-bar-fill { height: 100%; background: var(--ink); transition: width 1s ease; }
     .impact-chart svg { width: 100%; }
-    .impact-note {
-      text-align: center;
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      color: var(--gray);
-      font-style: italic;
-    }
+    .impact-note { text-align: center; font-size: 0.68rem; letter-spacing: 0.15em; color: var(--gray); font-style: italic; }
 
     /* ===================== ABOUT ===================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8rem;
-      align-items: center;
-    }
-    .about-visual {
-      position: relative;
-      height: 500px;
-    }
-    .about-box {
-      width: 80%;
-      height: 100%;
-      background: var(--marble-dark);
-      border: 1px solid var(--marble-mid);
-      position: relative;
-      overflow: hidden;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+    .about-visual { position: relative; height: 500px; }
+    .about-box { width: 80%; height: 100%; background: var(--marble-dark); border: 1px solid var(--marble-mid); position: relative; overflow: hidden; }
     .about-box::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 20px,
-        rgba(180,170,155,0.05) 20px,
-        rgba(180,170,155,0.05) 21px
-      );
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(180,170,155,0.05) 20px, rgba(180,170,155,0.05) 21px);
     }
-    .about-initials {
-      position: absolute;
-      bottom: -1rem; right: -1rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 8rem;
-      font-weight: 900;
-      color: var(--marble-mid);
-      line-height: 1;
-      z-index: 2;
-      letter-spacing: -0.05em;
-    }
-    .about-tag {
-      position: absolute;
-      top: 2rem; right: 0;
-      background: var(--black);
-      color: var(--marble);
-      padding: 0.8rem 1.5rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .about-body {
-      font-size: 0.78rem;
-      line-height: 2.3;
-      color: var(--gray);
-      margin-bottom: 3rem;
-    }
+    .about-initials { position: absolute; bottom: -1rem; right: -1rem; font-family: 'Playfair Display', serif; font-size: 8rem; font-weight: 900; color: var(--marble-mid); line-height: 1; z-index: 2; letter-spacing: -0.05em; }
+    .about-tag { position: absolute; top: 2rem; right: 0; background: var(--black); color: var(--marble); padding: 0.8rem 1.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .about-body { font-size: 0.78rem; line-height: 2.3; color: var(--gray); margin-bottom: 3rem; }
     .about-body strong { color: var(--ink); font-weight: 400; }
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--marble-mid);
-    }
-    .stat-n {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--black);
-      display: block;
-    }
-    .stat-l {
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gray);
-    }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding-top: 2.5rem; border-top: 1px solid var(--marble-mid); }
+    .stat-n { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--black); display: block; }
+    .stat-l { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
 
     /* ===================== PROCESS ===================== */
-    .process-list {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--marble-mid);
-      border: 1px solid var(--marble-mid);
-    }
-    .process-item {
-      background: var(--marble);
-      padding: 3rem 2rem;
-      position: relative;
-      transition: background 0.3s;
-    }
+    .process-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--marble-mid); border: 1px solid var(--marble-mid); }
+    .process-item { background: var(--marble); padding: 3rem 2rem; position: relative; transition: background 0.3s; }
     .process-item:hover { background: var(--marble-dark); }
-    .process-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--marble-mid);
-      line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-    .process-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-      color: var(--black);
-    }
-    .process-desc {
-      font-size: 0.7rem;
-      line-height: 1.9;
-      color: var(--gray);
-    }
+    .process-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; color: var(--marble-mid); line-height: 1; margin-bottom: 1.5rem; }
+    .process-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem; color: var(--black); }
+    .process-desc { font-size: 0.7rem; line-height: 1.9; color: var(--gray); }
 
     /* ===================== CONTACT ===================== */
-    #contact {
-      background: var(--black);
-      color: var(--marble);
-    }
+    #contact { background: var(--black); color: var(--marble); }
     #contact .label { color: var(--gold); }
     #contact .section-title { color: var(--marble); }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 8rem;
-      align-items: start;
-    }
-    .contact-info-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 2.5rem;
-      color: rgba(240,237,232,0.5);
-      letter-spacing: 0.1em;
-    }
-    .contact-line {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .contact-icon {
-      width: 44px; height: 44px;
-      border: 1px solid rgba(240,237,232,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      color: var(--gold);
-    }
-    .contact-detail strong {
-      display: block;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(240,237,232,0.4);
-      margin-bottom: 0.3rem;
-      font-weight: 300;
-    }
-    .contact-detail span {
-      font-size: 0.82rem;
-      color: var(--marble);
-    }
-    .contact-detail a {
-      color: var(--marble);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 8rem; align-items: start; }
+    .contact-info-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; margin-bottom: 2.5rem; color: rgba(240,237,232,0.5); letter-spacing: 0.1em; }
+    .contact-line { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .contact-icon { width: 44px; height: 44px; border: 1px solid rgba(240,237,232,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; color: var(--gold); }
+    .contact-detail strong { display: block; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.4); margin-bottom: 0.3rem; font-weight: 300; }
+    .contact-detail span { font-size: 0.82rem; color: var(--marble); }
+    .contact-detail a { color: var(--marble); text-decoration: none; transition: color 0.3s; }
     .contact-detail a:hover { color: var(--gold); }
-
-    .contact-note {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(240,237,232,0.08);
-      font-size: 0.68rem;
-      line-height: 2;
-      color: rgba(240,237,232,0.35);
-    }
-
-    /* FORM */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 2rem;
-    }
+    .contact-note { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(240,237,232,0.08); font-size: 0.68rem; line-height: 2; color: rgba(240,237,232,0.35); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
     .form-group { margin-bottom: 2rem; }
-    .form-group label {
-      display: block;
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(240,237,232,0.4);
-      margin-bottom: 0.75rem;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(240,237,232,0.15);
-      padding: 0.75rem 0;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--marble);
-      outline: none;
-      transition: border-color 0.3s;
-      cursor: text;
-    }
+    .form-group label { display: block; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(240,237,232,0.4); margin-bottom: 0.75rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(240,237,232,0.15); padding: 0.75rem 0; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--marble); outline: none; transition: border-color 0.3s; cursor: text; }
     .form-group select { cursor: pointer; }
     .form-submit { cursor: pointer; }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(240,237,232,0.2); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(240,237,232,0.2); }
     .form-group select option { background: var(--black); }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
     .form-group textarea { resize: none; height: 90px; }
-    .form-submit {
-      width: 100%;
-      background: var(--marble);
-      color: var(--black);
-      border: none;
-      padding: 1.1rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      font-weight: 400;
-      transition: background 0.3s, color 0.3s;
-      margin-top: 0.5rem;
-    }
+    .form-submit { width: 100%; background: var(--marble); color: var(--black); border: none; padding: 1.1rem; font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 400; transition: background 0.3s, color 0.3s; margin-top: 0.5rem; }
     .form-submit:hover { background: var(--gold); }
-    #form-success {
-      display: none;
-      margin-top: 1rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-align: center;
-      padding: 1rem;
-      border: 1px solid rgba(184,169,138,0.3);
-    }
+    #form-success { display: none; margin-top: 1rem; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); text-align: center; padding: 1rem; border: 1px solid rgba(184,169,138,0.3); }
 
     /* ===================== FOOTER ===================== */
-    footer {
-      background: var(--black);
-      border-top: 1px solid rgba(240,237,232,0.06);
-      padding: 2.5rem 5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--marble);
-      letter-spacing: 0.05em;
-    }
-    .footer-copy {
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      color: rgba(240,237,232,0.25);
-    }
-    .footer-location {
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(240,237,232,0.3);
-    }
+    footer { background: var(--black); border-top: 1px solid rgba(240,237,232,0.06); padding: 2.5rem 5rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--marble); letter-spacing: 0.05em; }
+    .footer-copy { font-size: 0.58rem; letter-spacing: 0.15em; color: rgba(240,237,232,0.25); }
+    .footer-work-link { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.3); text-decoration: none; cursor: pointer; transition: color 0.3s; background: none; border: none; font-family: 'DM Sans', sans-serif; font-weight: 300; }
+    .footer-work-link:hover { color: var(--gold); }
 
     /* ===================== ANIMATIONS ===================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
     @keyframes fadeIn { to { opacity: 1; } }
+
+    /* ===================== PORTFOLIO STYLES ===================== */
+    .view-transition {
+      animation: viewFadeIn 0.5s ease forwards;
+    }
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Portfolio nav override */
+    .portfolio-nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      transition: color 0.3s, gap 0.3s;
+      opacity: 0.6;
+    }
+    .portfolio-nav-back:hover { color: var(--black); opacity: 1; gap: 1rem; }
+
+    .page-hero {
+      padding: 80px 5rem 40px;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid var(--marble-mid);
+    }
+    .page-eyebrow { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.05; color: var(--black); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-desc { font-size: 0.85rem; line-height: 2; color: var(--gray); max-width: 520px; opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
+    .page-count { position: absolute; right: 5rem; bottom: 80px; font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; color: var(--marble-mid); line-height: 1; opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
+
+    .trophies-section { padding: 3rem 5rem; position: relative; z-index: 1; }
+    .trophies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--marble-mid); border: 1px solid var(--marble-mid); }
+
+    .trophy-card { background: var(--marble); position: relative; overflow: hidden; cursor: pointer; transition: background 0.3s; opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards; }
+    .trophy-card:nth-child(1) { animation-delay: 0.1s; }
+    .trophy-card:nth-child(2) { animation-delay: 0.25s; }
+    .trophy-card:nth-child(3) { animation-delay: 0.4s; }
+    .trophy-card:hover { background: var(--marble-dark); }
+    .trophy-card:hover .browser-mockup { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.15); }
+    .trophy-card:hover .card-arrow { gap: 1.2rem; }
+    .trophy-card-inner { padding: 2.5rem 2.5rem 2rem; }
+
+    .browser-mockup { width: 100%; border-radius: 8px 8px 0 0; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease; background: white; border: 1px solid rgba(0,0,0,0.08); margin-bottom: 2rem; }
+    .browser-chrome { background: #e8e4dc; padding: 8px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .browser-dots { display: flex; gap: 5px; }
+    .browser-dot { width: 8px; height: 8px; border-radius: 50%; background: #c8c3b8; }
+    .browser-url { flex: 1; background: #cdc8bc; border-radius: 20px; padding: 3px 10px; font-size: 9px; color: #6a6458; font-family: 'DM Sans', sans-serif; letter-spacing: 0.03em; }
+    .browser-content { height: 200px; overflow: hidden; position: relative; }
+
+    .lf-mockup { width: 100%; height: 100%; background: #fafaf7; position: relative; overflow: hidden; }
+    .lf-blob { position: absolute; border-radius: 50%; filter: blur(30px); opacity: 0.3; }
+    .lf-blob-1 { width: 160px; height: 160px; background: #00C9B1; top: -40px; right: -20px; }
+    .lf-blob-2 { width: 100px; height: 100px; background: #FF6B9D; bottom: -20px; left: -10px; }
+    .lf-nav { position: absolute; top: 0; left: 0; right: 0; height: 28px; background: rgba(250,250,247,0.95); border-bottom: 1px solid rgba(0,201,177,0.15); display: flex; align-items: center; padding: 0 10px; gap: 8px; z-index: 2; }
+    .lf-nav-logo { font-family: 'Playfair Display', serif; font-size: 8px; font-weight: 700; color: #1a1a2e; }
+    .lf-nav-logo span { color: #00C9B1; }
+    .lf-nav-links { display: flex; gap: 8px; margin-left: auto; }
+    .lf-nav-link { font-size: 6px; color: #888; font-weight: 600; }
+    .lf-nav-cta { background: #00C9B1; color: white; padding: 2px 6px; border-radius: 20px; font-size: 6px; font-weight: 700; }
+    .lf-hero { position: absolute; top: 28px; left: 0; right: 0; bottom: 0; padding: 12px 12px 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: center; }
+    .lf-badge { display: inline-flex; align-items: center; gap: 4px; background: white; border: 1px solid #00C9B1; border-radius: 20px; padding: 2px 7px; font-size: 5.5px; font-weight: 700; color: #00C9B1; margin-bottom: 5px; }
+    .lf-h1 { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 800; line-height: 1.15; color: #1a1a2e; margin-bottom: 5px; }
+    .lf-h1 .t { color: #00C9B1; } .lf-h1 .p { color: #FF6B9D; }
+    .lf-sub { font-size: 5.5px; color: #888; line-height: 1.6; margin-bottom: 7px; }
+    .lf-btns { display: flex; gap: 5px; }
+    .lf-btn-p { background: #00C9B1; color: white; padding: 3px 8px; border-radius: 20px; font-size: 5.5px; font-weight: 700; }
+    .lf-btn-s { background: white; color: #1a1a2e; padding: 3px 8px; border-radius: 20px; font-size: 5.5px; font-weight: 700; border: 1px solid rgba(0,0,0,0.1); }
+    .lf-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .lf-sm-card { background: #f5f5f0; border-radius: 8px; padding: 5px; text-align: center; }
+    .lf-sm-emoji { font-size: 10px; display: block; }
+    .lf-sm-name { font-size: 4.5px; font-weight: 700; color: #1a1a2e; display: block; margin-top: 2px; }
+    .lf-sm-price { font-size: 5px; font-weight: 800; color: #00C9B1; }
+
+    .trophy-placeholder { background: var(--marble-dark); border: 2px dashed var(--marble-mid); cursor: default; }
+    .trophy-placeholder:hover { background: var(--marble-dark); }
+    .placeholder-inner { padding: 2.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 340px; text-align: center; gap: 1rem; }
+    .placeholder-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; color: var(--marble-mid); line-height: 1; }
+    .placeholder-label { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--marble-mid); }
+    .placeholder-line { width: 40px; height: 1px; background: var(--marble-mid); }
+    .placeholder-desc { font-size: 0.7rem; color: var(--marble-mid); font-style: italic; line-height: 1.8; }
+
+    .card-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .card-category { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .card-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--black); margin-bottom: 0.3rem; }
+    .card-location { font-size: 0.7rem; color: var(--gray); }
+    .card-badge { background: var(--black); color: var(--marble); font-size: 0.58rem; letter-spacing: 0.15em; padding: 0.3rem 0.8rem; white-space: nowrap; flex-shrink: 0; }
+    .card-footer { display: flex; align-items: center; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--marble-mid); }
+    .card-arrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: gap 0.3s; font-weight: 400; }
+
+    .stats-bar { padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background-color: var(--marble-mid); border-top: 1px solid var(--marble-mid); position: relative; z-index: 1; }
+    .stat-block { background: var(--black); padding: 2rem 2.5rem; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--marble); line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.4); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===================== MODAL MAINTENANCE ===================== */
+    #maintenanceModal {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(17,17,16,0.75); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 2rem;
+    }
 
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 1024px) {
       nav { padding: 1.5rem 2rem; }
-      nav::after { left: 2rem; right: 2rem; }
       nav ul { display: none; }
       .hero { grid-template-columns: 1fr; padding: 0 2rem 5rem; }
       .hero-graphic { display: none; }
@@ -825,13 +587,16 @@
       .form-row { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
       .maintenance-band { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .page-hero { padding: 120px 2rem 60px; }
+      .page-count { display: none; }
+      .trophies-section { padding: 4rem 2rem; }
+      .trophies-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .process-list { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: 1fr 1fr; }
     }
-
-    /* ===================== DESKTOP FONT BOOST ===================== */
     @media (min-width: 1025px) {
       .hero-eyebrow { font-size: 0.74rem; }
       .hero-desc { font-size: 0.91rem; }
@@ -840,7 +605,6 @@
       .offer-price-sub { font-size: 0.74rem; }
       .offer-features li { font-size: 0.81rem; }
       .offer-link { font-size: 0.70rem; }
-      .service-desc { font-size: 0.79rem; }
       .about-body { font-size: 0.88rem; }
       .stat-l { font-size: 0.66rem; }
       .process-desc { font-size: 0.79rem; }
@@ -850,558 +614,469 @@
       .contact-detail strong { font-size: 0.70rem; }
       .contact-note { font-size: 0.77rem; }
       .form-group label { font-size: 0.66rem; }
-      .form-group input,
-      .form-group select,
-      .form-group textarea { font-size: 0.93rem; }
+      .form-group input, .form-group select, .form-group textarea { font-size: 0.93rem; }
       .footer-copy { font-size: 0.66rem; }
-      .footer-location { font-size: 0.70rem; }
       nav ul a { font-size: 0.79rem; }
-      .hero-scroll { font-size: 0.66rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===================== INTRO ===================== -->
+<!-- INTRO (only on first load) -->
 <div id="intro">
-  <div class="intro-title">
-    <span>ClarkWeb</span>
-  </div>
+  <div class="intro-title"><span>ClarkWeb</span></div>
   <p class="intro-line">Création de sites internet pour commerces locaux</p>
 </div>
 
-<!-- ===================== NAV ===================== -->
+<!-- NAV (shared) -->
 <nav id="nav">
-  <a href="#" class="nav-logo">ClarkWeb</a>
-  <ul>
+  <a class="nav-logo" onclick="showView('main')">ClarkWeb</a>
+  <ul id="nav-main-links">
     <li><a href="#offres">Offres</a></li>
     <li><a href="#about">À propos</a></li>
     <li><a href="#process">Méthode</a></li>
+    <li><a onclick="showView('portfolio')" style="cursor:pointer;">Mon travail</a></li>
     <li><a href="#contact" class="nav-cta">Me contacter</a></li>
   </ul>
+  <button class="portfolio-nav-back" id="nav-back-btn" style="display:none;" onclick="showView('main')">← Retour au site</button>
 </nav>
 
-<!-- ===================== HERO ===================== -->
-<section>
-  <div class="hero" id="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant</p>
-      <h1 class="hero-title">Votre commerce mérite<br>un site à la hauteur<br>de <em>son ambition.</em></h1>
-      <div class="hero-bottom">
-        <p class="hero-desc">Je crée des sites internet modernes, efficaces et <em>sur mesure</em> pour les commerces locaux. Rapide, abordable, sans jargon.</p>
-        <a href="#offres" class="hero-btn">Découvrir les offres →</a>
-      </div>
-    </div>
+<!-- ===================== VIEW : MAIN ===================== -->
+<div id="view-main" class="view active">
 
-    <div class="hero-graphic">
-      <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;">
-        <defs>
-          <radialGradient id="grid-mask" cx="50%" cy="52%" r="45%">
-            <stop offset="0%" stop-color="white" stop-opacity="1"/>
-            <stop offset="55%" stop-color="white" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="white" stop-opacity="0"/>
-          </radialGradient>
-          <mask id="fade-mask">
-            <rect x="0" y="0" width="520" height="480" fill="url(#grid-mask)"/>
-          </mask>
-        </defs>
-
-        <!-- Quadrillage identique au body::before mais plus foncé, masqué en fondu -->
-        <g mask="url(#fade-mask)">
-          <!-- Angle 105deg -->
-          <line x1="-100" y1="0" x2="620" y2="260" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="80" x2="620" y2="340" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="160" x2="620" y2="420" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="240" x2="620" y2="500" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="-80" x2="620" y2="180" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="-160" x2="620" y2="100" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <line x1="-100" y1="320" x2="620" y2="580" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
-          <!-- Angle -15deg -->
-          <line x1="0" y1="-30" x2="520" y2="105" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
-          <line x1="0" y1="90" x2="520" y2="225" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
-          <line x1="0" y1="210" x2="520" y2="345" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
-          <line x1="0" y1="330" x2="520" y2="465" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
-          <line x1="0" y1="450" x2="520" y2="585" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
-        </g>
-
-        <!-- Texte -->
-        <text x="260" y="188" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="400" font-size="22" fill="#2a2925" opacity="0.5" letter-spacing="10">YOUR IDEA</text>
-        <text x="260" y="258" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="70" fill="#111110" opacity="0.75" letter-spacing="0">Our Work.</text>
-        <text x="260" y="318" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="300" font-size="14" fill="#4a4840" opacity="0.45" letter-spacing="10" font-style="italic">the best result.</text>
-
-        <!-- Point décoratif -->
-        <circle cx="260" cy="352" r="2" fill="#b8a98a" opacity="0.5"/>
-        <line x1="200" y1="352" x2="252" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
-        <line x1="268" y1="352" x2="320" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
-      </svg>
-    </div>
-
-    <div class="hero-scroll">Défiler</div>
-  </div>
-</section>
-
-<!-- ===================== OFFRES ===================== -->
-<section id="offres">
-  <div class="section-inner">
-    <div class="section-separator reveal">
-      <span class="separator-line"></span>
-      <p class="label-large">Tarifs & prestations</p>
-      <span class="separator-line"></span>
-    </div>
-    <h2 class="section-title reveal">Des offres <em>claires,</em><br>sans mauvaises surprises.</h2>
-
-    <div class="offers-grid reveal">
-      <div class="offer-card">
-        <div class="offer-name">Essentiel</div>
-        <div class="offer-price">600€</div>
-        <div class="offer-price-sub">Paiement unique — livraison sous 7 jours</div>
-        <ul class="offer-features">
-          <li>Design moderne sur mesure</li>
-          <li>Responsive mobile & tablette</li>
-          <li>Jusqu'à 4 sections</li>
-          <li>Formulaire de contact</li>
-          <li>Mise en ligne incluse</li>
-          <li>6 mois de maintenance offerts</li>
-        </ul>
-        <a href="#contact" class="offer-link">Demander un devis →</a>
-      </div>
-
-      <div class="offer-card featured">
-        <div class="offer-badge">Le plus populaire</div>
-        <div class="offer-name">Signature</div>
-        <div class="offer-price" style="color:var(--marble)">800€</div>
-        <div class="offer-price-sub">Paiement unique — livraison sous 10 jours</div>
-        <ul class="offer-features">
-          <li>Tout le pack Vitrine</li>
-          <li>Jusqu'à 6 sections</li>
-          <li>Galerie photos animée</li>
-          <li>Avis Google intégrés</li>
-          <li>Plan Maps intégré</li>
-          <li>Bouton appel direct mobile</li>
-          <li>6 mois de maintenance offerts</li>
-        </ul>
-        <a href="#contact" class="offer-link">Demander un devis →</a>
-      </div>
-
-      <div class="offer-card">
-        <div class="offer-name">Premium</div>
-        <div class="offer-price">Sur devis</div>
-        <div class="offer-price-sub">À partir de 1 000€ selon le projet</div>
-        <ul class="offer-features">
-          <li>Tout le pack Signature</li>
-          <li>Fonctionnalités spécifiques</li>
-          <li>Système de réservation</li>
-          <li>Catalogue produits</li>
-          <li>Blog ou espace actualités</li>
-          <li>6 mois de maintenance offerts</li>
-        </ul>
-        <a href="#contact" class="offer-link">Discutons de votre projet →</a>
-      </div>
-    </div>
-
-    <div class="maintenance-band reveal">
-      <div>
-        <div class="offer-name">Maintenance annuelle</div>
-        <div class="offer-price">150€ <span style="font-size:1rem;font-weight:300;color:var(--gray)">/an</span></div>
-      </div>
-      <p>Renouvellement du domaine, mises à jour de contenu (tarifs, horaires, photos), corrections techniques et support réactif. Offerte les 6 premiers mois avec chaque formule.</p>
-      <a href="#" class="offer-link" id="maintenanceLink">En savoir plus →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== MODAL MAINTENANCE ===================== -->
-<div id="maintenanceModal" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:500;
-  background:rgba(17,17,16,0.75);
-  backdrop-filter:blur(6px);
-  align-items:center;
-  justify-content:center;
-  padding:2rem;
-">
-  <div style="
-    background:var(--marble);
-    max-width:780px;
-    width:100%;
-    max-height:88vh;
-    overflow-y:auto;
-    position:relative;
-    padding:4rem;
-    border:1px solid var(--marble-mid);
-  ">
-    <button id="modalClose" style="
-      position:absolute;top:1.5rem;right:1.5rem;
-      background:none;border:none;
-      font-size:1.4rem;color:var(--gray);
-      line-height:1;cursor:pointer;
-    ">✕</button>
-
-    <p style="font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Maintenance annuelle</p>
-    <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:400;color:var(--black);margin-bottom:0.5rem;">150€ <em style="font-style:italic;font-size:1.1rem;color:var(--gray);font-weight:300;">/an</em></h2>
-    <p style="font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:2.5rem;text-transform:uppercase;">Offerte les 6 premiers mois avec chaque formule</p>
-
-    <div style="height:1px;background:var(--marble-mid);margin-bottom:2.5rem;"></div>
-
-    <p style="font-size:0.76rem;line-height:2.3;color:var(--gray);margin-bottom:2.5rem;">
-      La maintenance c'est la garantie que votre site reste <strong style="color:var(--ink);font-weight:400;">toujours à jour, toujours en ligne, toujours efficace.</strong> Un site à l'abandon fait fuir les clients — je m'assure que ça n'arrive jamais.
-    </p>
-
-    <p style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--black);margin-bottom:1.5rem;">Ce qui est inclus</p>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--marble-mid);border:1px solid var(--marble-mid);margin-bottom:2.5rem;">
-      <div style="background:var(--marble);padding:1.5rem 2rem;">
-        <p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Technique</p>
-        <ul style="list-style:none;">
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Renouvellement du nom de domaine</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Surveillance de la mise en ligne</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Correction des bugs si problème</li>
-        </ul>
-      </div>
-      <div style="background:var(--marble);padding:1.5rem 2rem;">
-        <p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Contenu</p>
-        <ul style="list-style:none;">
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Mise à jour des tarifs et horaires</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Ajout de nouvelles photos</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Modifications mineures du texte</li>
-        </ul>
-      </div>
-      <div style="background:var(--marble);padding:1.5rem 2rem;">
-        <p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Référencement</p>
-        <ul style="list-style:none;">
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Fiche Google Maps maintenue à jour</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Vérification visibilité Google</li>
-        </ul>
-      </div>
-      <div style="background:var(--marble);padding:1.5rem 2rem;">
-        <p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Support</p>
-        <ul style="list-style:none;">
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Joignable par téléphone & email</li>
-          <li style="font-size:0.72rem;line-height:1;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;align-items:center;"><span style="color:var(--gold);">—</span> Réponse sous 24h garantie</li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="background:var(--marble-dark);border:1px solid var(--marble-mid);padding:1.5rem 2rem;margin-bottom:2.5rem;">
-      <p style="font-size:0.72rem;line-height:2;color:var(--gray);">
-        Pour 150€ par an, votre site reste <strong style="color:var(--ink);font-weight:400;">professionnel, à jour et visible</strong> toute l'année. C'est moins de 13€ par mois pour ne jamais perdre un client à cause d'un site obsolète ou hors ligne.
-      </p>
-    </div>
-
-    <a href="#contact" id="modalCta" style="
-      display:inline-flex;align-items:center;gap:1rem;
-      text-decoration:none;
-      background:var(--black);color:var(--marble);
-      font-family:'DM Sans',sans-serif;
-      font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
-      padding:1.1rem 2.5rem;
-      transition:background 0.3s;
-    ">Me contacter →</a>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ===================== IMPACT ===================== -->
-<section id="impact">
-  <div class="section-inner">
-    <div class="section-separator reveal">
-      <span class="separator-line"></span>
-      <p class="label-large">L'impact en chiffres</p>
-      <span class="separator-line"></span>
-    </div>
-    <h2 class="section-title reveal">Vos concurrents sont<br>en ligne. <em>Et vous ?</em></h2>
-
-    <div class="impact-grid reveal">
-
-      <!-- Stat 1 -->
-      <div class="impact-card">
-        <div class="impact-num">+200%</div>
-        <div class="impact-label">De visibilité sur Google</div>
-        <p class="impact-desc">Un site bien référencé apparaît dans les recherches locales. Vos concurrents sans site sont invisibles — vous, non.</p>
-        <div class="impact-bar-wrap">
-          <div class="impact-bar-label"><span>Sans site</span><span>12 vues/mois</span></div>
-          <div class="impact-bar"><div class="impact-bar-fill" style="width:15%"></div></div>
-          <div class="impact-bar-label"><span>Avec site</span><span>250+ vues/mois</span></div>
-          <div class="impact-bar"><div class="impact-bar-fill" style="width:85%"></div></div>
+  <!-- HERO -->
+  <section>
+    <div class="hero" id="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Gilles Ballester — Développeur web indépendant</p>
+        <h1 class="hero-title">Votre commerce mérite<br>un site à la hauteur<br>de <em>son ambition.</em></h1>
+        <div class="hero-bottom">
+          <p class="hero-desc">Je crée des sites internet modernes, efficaces et <em>sur mesure</em> pour les commerces locaux. Rapide, abordable, sans jargon.</p>
+          <a href="#offres" class="hero-btn">Découvrir les offres →</a>
         </div>
       </div>
-
-      <!-- Stat 2 -->
-      <div class="impact-card">
-        <div class="impact-num">76%</div>
-        <div class="impact-label">Des recherches locales aboutissent à une visite</div>
-        <p class="impact-desc">Quand quelqu'un cherche votre type de commerce sur Google, il visite le premier résultat dans la journée.</p>
-        <div class="impact-chart">
-          <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="55" cy="55" r="38" fill="none" stroke="var(--marble-mid)" stroke-width="8"/>
-            <circle cx="55" cy="55" r="38" fill="none" stroke="var(--ink)" stroke-width="8"
-              stroke-dasharray="181.5 57.3" stroke-dashoffset="59.7" stroke-linecap="butt"/>
-            <text x="55" y="50" text-anchor="middle" font-family="'Playfair Display',serif" font-size="16" font-weight="700" fill="var(--black)">76%</text>
-            <text x="55" y="63" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gray)">convertis</text>
-            <rect x="105" y="22" width="9" height="9" fill="var(--ink)"/>
-            <text x="120" y="31" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--gray)">Visitent le commerce</text>
-            <rect x="105" y="40" width="9" height="9" fill="var(--marble-mid)"/>
-            <text x="120" y="49" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--gray)">Ne donnent pas suite</text>
-            <text x="105" y="78" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gold)" font-style="italic">Source : Google Consumer</text>
-            <text x="105" y="89" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gold)" font-style="italic">Insights</text>
-          </svg>
-        </div>
+      <div class="hero-graphic">
+        <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;">
+          <defs>
+            <radialGradient id="grid-mask" cx="50%" cy="52%" r="45%">
+              <stop offset="0%" stop-color="white" stop-opacity="1"/>
+              <stop offset="55%" stop-color="white" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="white" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="fade-mask">
+              <rect x="0" y="0" width="520" height="480" fill="url(#grid-mask)"/>
+            </mask>
+          </defs>
+          <g mask="url(#fade-mask)">
+            <line x1="-100" y1="0" x2="620" y2="260" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="80" x2="620" y2="340" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="160" x2="620" y2="420" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="240" x2="620" y2="500" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="-80" x2="620" y2="180" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="-160" x2="620" y2="100" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="-100" y1="320" x2="620" y2="580" stroke="rgba(130,120,105,0.35)" stroke-width="1"/>
+            <line x1="0" y1="-30" x2="520" y2="105" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+            <line x1="0" y1="90" x2="520" y2="225" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+            <line x1="0" y1="210" x2="520" y2="345" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+            <line x1="0" y1="330" x2="520" y2="465" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+            <line x1="0" y1="450" x2="520" y2="585" stroke="rgba(110,100,88,0.28)" stroke-width="1"/>
+          </g>
+          <text x="260" y="188" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="400" font-size="22" fill="#2a2925" opacity="0.5" letter-spacing="10">YOUR IDEA</text>
+          <text x="260" y="258" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="70" fill="#111110" opacity="0.75">Our Work.</text>
+          <text x="260" y="318" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="300" font-size="14" fill="#4a4840" opacity="0.45" letter-spacing="10" font-style="italic">the best result.</text>
+          <circle cx="260" cy="352" r="2" fill="#b8a98a" opacity="0.5"/>
+          <line x1="200" y1="352" x2="252" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
+          <line x1="268" y1="352" x2="320" y2="352" stroke="#b8b2a8" stroke-width="0.5" opacity="0.4"/>
+        </svg>
       </div>
-
-      <!-- Stat 3 -->
-      <div class="impact-card">
-        <div class="impact-num">3–5</div>
-        <div class="impact-label">Nouveaux clients par mois en moyenne</div>
-        <p class="impact-desc">À 40€ de panier moyen, c'est entre 1 440€ et 2 400€ de chiffre d'affaires supplémentaire par an — pour un site à 600€.</p>
-        <div class="impact-bar-wrap">
-          <div class="impact-bar-label"><span>Investissement site</span><span>600€</span></div>
-          <div class="impact-bar"><div class="impact-bar-fill" style="width:25%;background:var(--gold)"></div></div>
-          <div class="impact-bar-label"><span>Retour estimé / an</span><span>1 440€+</span></div>
-          <div class="impact-bar"><div class="impact-bar-fill" style="width:100%"></div></div>
-        </div>
-      </div>
-
+      <div class="hero-scroll">Défiler</div>
     </div>
+  </section>
 
-    <p class="impact-note reveal">Données suivies en temps réel via Google Analytics — intégré gratuitement sur chaque site ClarkWeb.</p>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ===================== ABOUT ===================== -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-visual reveal">
-        <div class="about-box" style="overflow:hidden;display:flex;align-items:stretch;">
-          <svg width="100%" height="100%" viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-
-            <!-- Browser chrome -->
-            <rect x="0" y="0" width="480" height="520" fill="#e8e4dc"/>
-            <rect x="0" y="0" width="480" height="38" fill="#d6d1c8"/>
-            <!-- Boutons browser -->
-            <circle cx="18" cy="19" r="5" fill="#c8c3b8"/>
-            <circle cx="34" cy="19" r="5" fill="#c8c3b8"/>
-            <circle cx="50" cy="19" r="5" fill="#c8c3b8"/>
-            <!-- Barre URL -->
-            <rect x="70" y="11" width="320" height="16" rx="8" fill="#cdc8bc"/>
-            <text x="230" y="23" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" fill="#8a8070">clarkweb.fr</text>
-
-            <!-- Contenu site mockup -->
-            <!-- Nav mockup -->
-            <rect x="0" y="38" width="480" height="32" fill="#f0ede8"/>
-            <text x="20" y="59" font-family="'Playfair Display', Georgia, serif" font-size="11" font-weight="700" fill="#111110">ClarkWeb</text>
-            <rect x="340" y="46" width="60" height="16" rx="0" fill="#111110"/>
-            <text x="370" y="58" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#f0ede8" letter-spacing="1">CONTACT</text>
-
-            <!-- Hero mockup -->
-            <rect x="0" y="70" width="480" height="180" fill="#f0ede8"/>
-            <text x="24" y="110" font-family="'Playfair Display', Georgia, serif" font-size="7" fill="#b8a98a" letter-spacing="3">VOTRE COMMERCE MÉRITE</text>
-            <text x="24" y="135" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="400" fill="#111110">Votre site,</text>
-            <text x="24" y="163" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="400" fill="#111110" font-style="italic">votre image.</text>
-            <rect x="24" y="178" width="80" height="20" rx="0" fill="#111110"/>
-            <text x="64" y="192" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#f0ede8" letter-spacing="1">DÉCOUVRIR →</text>
-
-            <!-- Séparateur -->
-            <line x1="0" y1="250" x2="480" y2="250" stroke="#d6d1c8" stroke-width="0.5"/>
-
-            <!-- Cards offres mockup -->
-            <rect x="16" y="262" width="138" height="120" fill="#e8e4dc"/>
-            <text x="28" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#111110">Vitrine</text>
-            <text x="28" y="302" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="#111110">600€</text>
-            <rect x="28" y="312" width="60" height="1" fill="#b8b2a8"/>
-            <rect x="28" y="320" width="90" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="28" y="330" width="75" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="28" y="340" width="80" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="28" y="358" width="50" height="12" fill="#111110"/>
-            <text x="53" y="368" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="6" fill="#f0ede8">DEVIS →</text>
-
-            <rect x="170" y="262" width="138" height="120" fill="#111110"/>
-            <text x="182" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#f0ede8">Vitrine+</text>
-            <text x="182" y="302" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="#f0ede8">800€</text>
-            <rect x="182" y="312" width="60" height="1" fill="#4a4840"/>
-            <rect x="182" y="320" width="90" height="5" rx="1" fill="#333"/>
-            <rect x="182" y="330" width="75" height="5" rx="1" fill="#333"/>
-            <rect x="182" y="340" width="80" height="5" rx="1" fill="#333"/>
-            <rect x="182" y="358" width="50" height="12" fill="#b8a98a"/>
-            <text x="207" y="368" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="6" fill="#111110">DEVIS →</text>
-
-            <rect x="326" y="262" width="138" height="120" fill="#e8e4dc"/>
-            <text x="338" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#111110">Sur-mesure</text>
-            <text x="338" y="302" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="700" fill="#111110">Sur devis</text>
-            <rect x="338" y="312" width="60" height="1" fill="#b8b2a8"/>
-            <rect x="338" y="320" width="90" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="338" y="330" width="75" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="338" y="340" width="80" height="5" rx="1" fill="#cdc8bc"/>
-            <rect x="338" y="358" width="50" height="12" fill="#111110"/>
-            <text x="363" y="368" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="6" fill="#f0ede8">DEVIS →</text>
-
-            <!-- Footer mockup -->
-            <rect x="0" y="390" width="480" height="130" fill="#111110"/>
-            <text x="24" y="415" font-family="'Playfair Display', Georgia, serif" font-size="12" font-weight="700" fill="#f0ede8">ClarkWeb</text>
-            <rect x="24" y="425" width="120" height="1" fill="#333"/>
-            <rect x="24" y="435" width="140" height="5" rx="1" fill="#333"/>
-            <rect x="24" y="445" width="100" height="5" rx="1" fill="#333"/>
-            <rect x="24" y="455" width="120" height="5" rx="1" fill="#333"/>
-            <text x="240" y="500" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#4a4840" letter-spacing="2">© 2025 CLARKWEB</text>
-
-          </svg>
+  <!-- OFFRES -->
+  <section id="offres">
+    <div class="section-inner">
+      <div class="section-separator reveal"><span class="separator-line"></span><p class="label-large">Tarifs & prestations</p><span class="separator-line"></span></div>
+      <h2 class="section-title reveal">Des offres <em>claires,</em><br>sans mauvaises surprises.</h2>
+      <div class="offers-grid reveal">
+        <div class="offer-card">
+          <div class="offer-name">Essentiel</div>
+          <div class="offer-price">600€</div>
+          <div class="offer-price-sub">Paiement unique — livraison sous 7 jours</div>
+          <ul class="offer-features">
+            <li>Design moderne sur mesure</li>
+            <li>Responsive mobile & tablette</li>
+            <li>Jusqu'à 4 sections</li>
+            <li>Formulaire de contact</li>
+            <li>Mise en ligne incluse</li>
+            <li>6 mois de maintenance offerts</li>
+          </ul>
+          <a href="#contact" class="offer-link">Demander un devis →</a>
         </div>
-        <div class="about-tag">Depuis 2025</div>
+        <div class="offer-card featured">
+          <div class="offer-badge">Le plus populaire</div>
+          <div class="offer-name">Signature</div>
+          <div class="offer-price" style="color:var(--marble)">800€</div>
+          <div class="offer-price-sub">Paiement unique — livraison sous 10 jours</div>
+          <ul class="offer-features">
+            <li>Tout le pack Vitrine</li>
+            <li>Jusqu'à 6 sections</li>
+            <li>Galerie photos animée</li>
+            <li>Avis Google intégrés</li>
+            <li>Plan Maps intégré</li>
+            <li>Bouton appel direct mobile</li>
+            <li>6 mois de maintenance offerts</li>
+          </ul>
+          <a href="#contact" class="offer-link">Demander un devis →</a>
+        </div>
+        <div class="offer-card">
+          <div class="offer-name">Premium</div>
+          <div class="offer-price">Sur devis</div>
+          <div class="offer-price-sub">À partir de 1 000€ selon le projet</div>
+          <ul class="offer-features">
+            <li>Tout le pack Signature</li>
+            <li>Fonctionnalités spécifiques</li>
+            <li>Système de réservation</li>
+            <li>Catalogue produits</li>
+            <li>Blog ou espace actualités</li>
+            <li>6 mois de maintenance offerts</li>
+          </ul>
+          <a href="#contact" class="offer-link">Discutons de votre projet →</a>
+        </div>
       </div>
-      <div class="about-text">
-        <p class="label reveal">Qui suis-je ?</p>
-        <h2 class="section-title reveal">Gilles Ballester,<br><em>votre développeur</em><br>web.</h2>
-        <p class="about-body reveal">
-          J'ai 18 ans et j'ai une conviction simple : <strong>trop de commerces locaux perdent des clients chaque jour</strong> faute d'une présence en ligne digne de ce nom.<br><br>
-          Je ne suis pas une agence parisienne qui facture 5 000€ pour un site que vous ne comprendrez jamais. Je suis <strong>quelqu'un de la région</strong>, joignable, disponible, et qui livre des sites modernes à des tarifs accessibles.
-        </p>
-        <div class="about-stats reveal">
-          <div>
-            <span class="stat-n">7j</span>
-            <span class="stat-l">Délai moyen</span>
+      <div class="maintenance-band reveal">
+        <div>
+          <div class="offer-name">Maintenance annuelle</div>
+          <div class="offer-price">150€ <span style="font-size:1rem;font-weight:300;color:var(--gray)">/an</span></div>
+        </div>
+        <p>Renouvellement du domaine, mises à jour de contenu (tarifs, horaires, photos), corrections techniques et support réactif. Offerte les 6 premiers mois avec chaque formule.</p>
+        <a href="#" class="offer-link" id="maintenanceLink">En savoir plus →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL MAINTENANCE -->
+  <div id="maintenanceModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(17,17,16,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:2rem;">
+    <div style="background:var(--marble);max-width:780px;width:100%;max-height:88vh;overflow-y:auto;position:relative;padding:4rem;border:1px solid var(--marble-mid);">
+      <button id="modalClose" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.4rem;color:var(--gray);line-height:1;cursor:pointer;">✕</button>
+      <p style="font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Maintenance annuelle</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:400;color:var(--black);margin-bottom:0.5rem;">150€ <em style="font-style:italic;font-size:1.1rem;color:var(--gray);font-weight:300;">/an</em></h2>
+      <p style="font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:2.5rem;text-transform:uppercase;">Offerte les 6 premiers mois avec chaque formule</p>
+      <div style="height:1px;background:var(--marble-mid);margin-bottom:2.5rem;"></div>
+      <p style="font-size:0.76rem;line-height:2.3;color:var(--gray);margin-bottom:2.5rem;">La maintenance c'est la garantie que votre site reste <strong style="color:var(--ink);font-weight:400;">toujours à jour, toujours en ligne, toujours efficace.</strong></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--marble-mid);border:1px solid var(--marble-mid);margin-bottom:2.5rem;">
+        <div style="background:var(--marble);padding:1.5rem 2rem;"><p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Technique</p><ul style="list-style:none;"><li style="font-size:0.72rem;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Renouvellement du nom de domaine</li><li style="font-size:0.72rem;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Surveillance de la mise en ligne</li><li style="font-size:0.72rem;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Correction des bugs si problème</li></ul></div>
+        <div style="background:var(--marble);padding:1.5rem 2rem;"><p style="font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Contenu</p><ul style="list-style:none;"><li style="font-size:0.72rem;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Mise à jour des tarifs et horaires</li><li style="font-size:0.72rem;color:var(--gray);border-bottom:1px solid var(--marble-mid);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Ajout de nouvelles photos</li><li style="font-size:0.72rem;color:var(--gray);padding:0.65rem 0;display:flex;gap:0.75rem;"><span style="color:var(--gold);">—</span>Modifications mineures du texte</li></ul></div>
+      </div>
+      <a href="#contact" id="modalCta" style="display:inline-flex;align-items:center;gap:1rem;text-decoration:none;background:var(--black);color:var(--marble);font-family:'DM Sans',sans-serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;padding:1.1rem 2.5rem;transition:background 0.3s;">Me contacter →</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- IMPACT -->
+  <section id="impact">
+    <div class="section-inner">
+      <div class="section-separator reveal"><span class="separator-line"></span><p class="label-large">L'impact en chiffres</p><span class="separator-line"></span></div>
+      <h2 class="section-title reveal">Vos concurrents sont<br>en ligne. <em>Et vous ?</em></h2>
+      <div class="impact-grid reveal">
+        <div class="impact-card">
+          <div class="impact-num">+200%</div>
+          <div class="impact-label">De visibilité sur Google</div>
+          <p class="impact-desc">Un site bien référencé apparaît dans les recherches locales. Vos concurrents sans site sont invisibles — vous, non.</p>
+          <div class="impact-bar-wrap">
+            <div class="impact-bar-label"><span>Sans site</span><span>12 vues/mois</span></div>
+            <div class="impact-bar"><div class="impact-bar-fill" style="width:15%"></div></div>
+            <div class="impact-bar-label"><span>Avec site</span><span>250+ vues/mois</span></div>
+            <div class="impact-bar"><div class="impact-bar-fill" style="width:85%"></div></div>
           </div>
-          <div>
-            <span class="stat-n">100%</span>
-            <span class="stat-l">Sur mesure</span>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">76%</div>
+          <div class="impact-label">Des recherches locales aboutissent à une visite</div>
+          <p class="impact-desc">Quand quelqu'un cherche votre type de commerce sur Google, il visite le premier résultat dans la journée.</p>
+          <div class="impact-chart">
+            <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="55" cy="55" r="38" fill="none" stroke="var(--marble-mid)" stroke-width="8"/>
+              <circle cx="55" cy="55" r="38" fill="none" stroke="var(--ink)" stroke-width="8" stroke-dasharray="181.5 57.3" stroke-dashoffset="59.7" stroke-linecap="butt"/>
+              <text x="55" y="50" text-anchor="middle" font-family="'Playfair Display',serif" font-size="16" font-weight="700" fill="var(--black)">76%</text>
+              <text x="55" y="63" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gray)">convertis</text>
+              <rect x="105" y="22" width="9" height="9" fill="var(--ink)"/>
+              <text x="120" y="31" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--gray)">Visitent le commerce</text>
+              <rect x="105" y="40" width="9" height="9" fill="var(--marble-mid)"/>
+              <text x="120" y="49" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--gray)">Ne donnent pas suite</text>
+              <text x="105" y="78" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gold)" font-style="italic">Source : Google Consumer</text>
+              <text x="105" y="89" font-family="'DM Sans',sans-serif" font-size="7" fill="var(--gold)" font-style="italic">Insights</text>
+            </svg>
           </div>
-          <div>
-            <span class="stat-n">Local</span>
-            <span class="stat-l">Partout en France</span>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num">3–5</div>
+          <div class="impact-label">Nouveaux clients par mois en moyenne</div>
+          <p class="impact-desc">À 40€ de panier moyen, c'est entre 1 440€ et 2 400€ de chiffre d'affaires supplémentaire par an — pour un site à 600€.</p>
+          <div class="impact-bar-wrap">
+            <div class="impact-bar-label"><span>Investissement site</span><span>600€</span></div>
+            <div class="impact-bar"><div class="impact-bar-fill" style="width:25%;background:var(--gold)"></div></div>
+            <div class="impact-bar-label"><span>Retour estimé / an</span><span>1 440€+</span></div>
+            <div class="impact-bar"><div class="impact-bar-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="impact-note reveal">Données suivies en temps réel via Google Analytics — intégré gratuitement sur chaque site ClarkWeb.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-box" style="overflow:hidden;display:flex;align-items:stretch;">
+            <svg width="100%" height="100%" viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+              <rect x="0" y="0" width="480" height="520" fill="#e8e4dc"/>
+              <rect x="0" y="0" width="480" height="38" fill="#d6d1c8"/>
+              <circle cx="18" cy="19" r="5" fill="#c8c3b8"/><circle cx="34" cy="19" r="5" fill="#c8c3b8"/><circle cx="50" cy="19" r="5" fill="#c8c3b8"/>
+              <rect x="70" y="11" width="320" height="16" rx="8" fill="#cdc8bc"/>
+              <text x="230" y="23" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8" fill="#8a8070">clarkweb.fr</text>
+              <rect x="0" y="38" width="480" height="32" fill="#f0ede8"/>
+              <text x="20" y="59" font-family="'Playfair Display', Georgia, serif" font-size="11" font-weight="700" fill="#111110">ClarkWeb</text>
+              <rect x="340" y="46" width="60" height="16" rx="0" fill="#111110"/>
+              <text x="370" y="58" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#f0ede8" letter-spacing="1">CONTACT</text>
+              <rect x="0" y="70" width="480" height="180" fill="#f0ede8"/>
+              <text x="24" y="110" font-family="'Playfair Display', Georgia, serif" font-size="7" fill="#b8a98a" letter-spacing="3">VOTRE COMMERCE MÉRITE</text>
+              <text x="24" y="135" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="400" fill="#111110">Votre site,</text>
+              <text x="24" y="163" font-family="'Playfair Display', Georgia, serif" font-size="26" font-weight="400" fill="#111110" font-style="italic">votre image.</text>
+              <rect x="24" y="178" width="80" height="20" rx="0" fill="#111110"/>
+              <text x="64" y="192" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#f0ede8" letter-spacing="1">DÉCOUVRIR →</text>
+              <line x1="0" y1="250" x2="480" y2="250" stroke="#d6d1c8" stroke-width="0.5"/>
+              <rect x="16" y="262" width="138" height="120" fill="#e8e4dc"/>
+              <text x="28" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#111110">Vitrine</text>
+              <text x="28" y="302" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="#111110">600€</text>
+              <rect x="170" y="262" width="138" height="120" fill="#111110"/>
+              <text x="182" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#f0ede8">Vitrine+</text>
+              <text x="182" y="302" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="#f0ede8">800€</text>
+              <rect x="326" y="262" width="138" height="120" fill="#e8e4dc"/>
+              <text x="338" y="283" font-family="'Playfair Display', Georgia, serif" font-size="10" fill="#111110">Sur-mesure</text>
+              <text x="338" y="302" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="700" fill="#111110">Sur devis</text>
+              <rect x="0" y="390" width="480" height="130" fill="#111110"/>
+              <text x="24" y="415" font-family="'Playfair Display', Georgia, serif" font-size="12" font-weight="700" fill="#f0ede8">ClarkWeb</text>
+              <text x="240" y="500" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7" fill="#4a4840" letter-spacing="2">© 2025 CLARKWEB</text>
+            </svg>
+          </div>
+          <div class="about-tag">Depuis 2025</div>
+        </div>
+        <div class="about-text">
+          <p class="label reveal">Qui suis-je ?</p>
+          <h2 class="section-title reveal">Gilles Ballester,<br><em>votre développeur</em><br>web.</h2>
+          <p class="about-body reveal">J'ai 18 ans et j'ai une conviction simple : <strong>trop de commerces locaux perdent des clients chaque jour</strong> faute d'une présence en ligne digne de ce nom.<br><br>Je ne suis pas une agence parisienne qui facture 5 000€ pour un site que vous ne comprendrez jamais. Je suis <strong>quelqu'un de la région</strong>, joignable, disponible, et qui livre des sites modernes à des tarifs accessibles.</p>
+          <div class="about-stats reveal">
+            <div><span class="stat-n">7j</span><span class="stat-l">Délai moyen</span></div>
+            <div><span class="stat-n">100%</span><span class="stat-l">Sur mesure</span></div>
+            <div><span class="stat-n">Local</span><span class="stat-l">Partout en France</span></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <div class="divider"></div>
 
-<!-- ===================== PROCESS ===================== -->
-<section id="process">
-  <div class="section-inner">
-    <p class="label reveal">Comment ça se passe ?</p>
-    <h2 class="section-title reveal">Simple, <em>rapide,</em> efficace.</h2>
-    <div class="process-list reveal">
-      <div class="process-item">
-        <div class="process-num">01</div>
-        <div class="process-name">On se rencontre</div>
-        <p class="process-desc">On échange en visio ou sur place selon vos préférences. Je récupère vos infos, vos photos, vos tarifs. Ça prend 30 minutes.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">02</div>
-        <div class="process-name">Je code votre site</div>
-        <p class="process-desc">Je crée votre site sur mesure selon votre identité. Vous recevez un aperçu pour valider avant mise en ligne.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">03</div>
-        <div class="process-name">Mise en ligne</div>
-        <p class="process-desc">Je m'occupe de tout : hébergement, nom de domaine, configuration. Votre site est en ligne et visible sur Google.</p>
-      </div>
-      <div class="process-item">
-        <div class="process-num">04</div>
-        <div class="process-name">Je reste disponible</div>
-        <p class="process-desc">Changement de tarifs, nouvelles photos, horaires des vacances — je suis joignable et je mets à jour rapidement.</p>
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-inner">
+      <p class="label reveal">Comment ça se passe ?</p>
+      <h2 class="section-title reveal">Simple, <em>rapide,</em> efficace.</h2>
+      <div class="process-list reveal">
+        <div class="process-item"><div class="process-num">01</div><div class="process-name">On se rencontre</div><p class="process-desc">On échange en visio ou sur place selon vos préférences. Je récupère vos infos, vos photos, vos tarifs. Ça prend 30 minutes.</p></div>
+        <div class="process-item"><div class="process-num">02</div><div class="process-name">Je code votre site</div><p class="process-desc">Je crée votre site sur mesure selon votre identité. Vous recevez un aperçu pour valider avant mise en ligne.</p></div>
+        <div class="process-item"><div class="process-num">03</div><div class="process-name">Mise en ligne</div><p class="process-desc">Je m'occupe de tout : hébergement, nom de domaine, configuration. Votre site est en ligne et visible sur Google.</p></div>
+        <div class="process-item"><div class="process-num">04</div><div class="process-name">Je reste disponible</div><p class="process-desc">Changement de tarifs, nouvelles photos, horaires des vacances — je suis joignable et je mets à jour rapidement.</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== CONTACT ===================== -->
-<section id="contact">
-  <div class="section-inner">
-    <p class="label">Contact</p>
-    <h2 class="section-title">Parlons de<br>votre <em>projet.</em></h2>
-    <div class="contact-grid">
-      <div>
-        <p class="contact-info-title">Coordonnées directes</p>
-        <div class="contact-line">
-          <div class="contact-icon">☎</div>
-          <div class="contact-detail">
-            <strong>Téléphone</strong>
-            <span><a href="tel:+33784417294">07 84 41 72 94</a></span>
-          </div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="label">Contact</p>
+      <h2 class="section-title">Parlons de<br>votre <em>projet.</em></h2>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-info-title">Coordonnées directes</p>
+          <div class="contact-line"><div class="contact-icon">☎</div><div class="contact-detail"><strong>Téléphone</strong><span><a href="tel:+33784417294">07 84 41 72 94</a></span></div></div>
+          <div class="contact-line"><div class="contact-icon">✉</div><div class="contact-detail"><strong>Email</strong><span><a href="mailto:clarkwebagence@gmail.com">clarkwebagence@gmail.com</a></span></div></div>
+          <div class="contact-line"><div class="contact-icon">⌖</div><div class="contact-detail"><strong>Zone d'intervention</strong><span>France entière — visio ou sur place</span></div></div>
+          <p class="contact-note">Vous pouvez me contacter directement par téléphone ou par email. Je réponds sous 24h maximum.</p>
         </div>
-        <div class="contact-line">
-          <div class="contact-icon">✉</div>
-          <div class="contact-detail">
-            <strong>Email</strong>
-            <span><a href="mailto:clarkwebagence@gmail.com">clarkwebagence@gmail.com</a></span>
-          </div>
-        </div>
-        <div class="contact-line">
-          <div class="contact-icon">⌖</div>
-          <div class="contact-detail">
-            <strong>Zone d'intervention</strong>
-            <span>France entière — visio ou sur place</span>
-          </div>
-        </div>
-        <p class="contact-note">
-          Vous pouvez me contacter directement par téléphone ou par email. Je réponds sous 24h maximum et on convient ensemble d'un échange en visio ou sur place selon vos préférences.
-        </p>
-      </div>
-
-      <div>
-        <form id="contactForm" action="https://formspree.io/f/xgonpdqo" method="POST">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Votre prénom</label>
-              <input type="text" name="prenom" placeholder="Jean" required />
+        <div>
+          <form id="contactForm" action="https://formspree.io/f/xgonpdqo" method="POST">
+            <div class="form-row">
+              <div class="form-group"><label>Votre prénom</label><input type="text" name="prenom" placeholder="Jean" required /></div>
+              <div class="form-group"><label>Votre commerce</label><input type="text" name="commerce" placeholder="Boulangerie Martin" /></div>
             </div>
-            <div class="form-group">
-              <label>Votre commerce</label>
-              <input type="text" name="commerce" placeholder="Boulangerie Martin" />
+            <div class="form-group"><label>Téléphone ou email</label><input type="text" name="contact" placeholder="06 00 00 00 00" required /></div>
+            <div class="form-group"><label>Formule souhaitée</label>
+              <select name="formule">
+                <option value="">Je ne sais pas encore</option>
+                <option>Essentiel — 600€</option>
+                <option>Signature — 800€</option>
+                <option>Premium — Sur devis</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Votre message</label><textarea name="message" placeholder="Décrivez votre commerce et ce que vous recherchez..."></textarea></div>
+            <button type="submit" class="form-submit">Envoyer ma demande →</button>
+            <div id="form-success">✓ Message envoyé — je vous recontacte sous 24h !</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER MAIN -->
+  <footer>
+    <div class="footer-logo">ClarkWeb</div>
+    <p class="footer-copy">© 2025 Gilles Ballester — Tous droits réservés</p>
+    <button class="footer-work-link" onclick="showView('portfolio')">Pas encore convaincu ? Voyez mon travail →</button>
+  </footer>
+
+</div><!-- end view-main -->
+
+
+<!-- ===================== VIEW : PORTFOLIO ===================== -->
+<div id="view-portfolio" class="view">
+
+  <!-- HERO PORTFOLIO -->
+  <div class="page-hero">
+    <p class="page-eyebrow">Portfolio — ClarkWeb</p>
+    <h1 class="page-title">Mon<br><em>travail.</em></h1>
+    <p class="page-desc">Chaque site ici représente un commerce local qui a décidé de prendre sa place sur internet. Du sur-mesure, livré en 7 jours.</p>
+  
+  </div>
+
+  <!-- GRILLE -->
+  <div class="trophies-section">
+    <div class="trophies-grid">
+
+      <!-- LAZY & FIT -->
+      <a class="trophy-card" href="https://club-lazy-and-fit.vercel.app/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:block;">
+        <div class="trophy-card-inner">
+          <div class="browser-mockup">
+            <div class="browser-chrome">
+              <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+              <div class="browser-url">club-lazy-and-fit.vercel.app</div>
+            </div>
+            <div class="browser-content">
+              <div class="lf-mockup">
+                <div class="lf-blob lf-blob-1"></div>
+                <div class="lf-blob lf-blob-2"></div>
+                <div class="lf-nav">
+                  <span class="lf-nav-logo">🦥 Club <span>Lazy&Fit</span></span>
+                  <div class="lf-nav-links">
+                    <span class="lf-nav-link">Accueil</span>
+                    <span class="lf-nav-link">Menu</span>
+                    <span class="lf-nav-link" style="color:#9B59F5;border:1px solid rgba(155,89,245,0.3);padding:1px 4px;border-radius:10px;">Programme</span>
+                    <span class="lf-nav-cta">📅 RDV</span>
+                  </div>
+                </div>
+                <div class="lf-hero">
+                  <div>
+                    <div class="lf-badge">📍 39 rue du Breuil, Vesoul</div>
+                    <div class="lf-h1">Le bar à<br><span class="t">smoothies</span><br><span class="p">healthy</span></div>
+                    <div class="lf-sub">Sain, naturel, protéiné et vraiment délicieux.</div>
+                    <div class="lf-btns"><span class="lf-btn-p">📅 RDV</span><span class="lf-btn-s">🥤 Carte</span></div>
+                  </div>
+                  <div class="lf-visual">
+                    <div class="lf-sm-card"><span class="lf-sm-emoji">🍪</span><span class="lf-sm-name">Crazy Cookie</span><span class="lf-sm-price">8€</span></div>
+                    <div class="lf-sm-card"><span class="lf-sm-emoji">🍫</span><span class="lf-sm-name">Choco Lover</span><span class="lf-sm-price">8€</span></div>
+                    <div class="lf-sm-card"><span class="lf-sm-emoji">🍓</span><span class="lf-sm-name">Strawberry</span><span class="lf-sm-price">8€</span></div>
+                    <div class="lf-sm-card"><span class="lf-sm-emoji">🍮</span><span class="lf-sm-name">Vanilla Dream</span><span class="lf-sm-price">8€</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label>Téléphone ou email</label>
-            <input type="text" name="contact" placeholder="06 00 00 00 00" required />
+          <div class="card-meta">
+            <div>
+              <div class="card-category">Bar à smoothies</div>
+              <div class="card-name">Club Lazy & Fit</div>
+              <div class="card-location">📍 Vesoul, Haute-Saône</div>
+            </div>
+            <div class="card-badge">Signature</div>
           </div>
-          <div class="form-group">
-            <label>Formule souhaitée</label>
-            <select name="formule">
-              <option value="">Je ne sais pas encore</option>
-              <option>Essentiel — 600€</option>
-              <option>Signature — 800€</option>
-              <option>Premium — Sur devis</option>
-            </select>
+          <div class="card-footer">
+            <span class="card-arrow">Voir le site →</span>
           </div>
-          <div class="form-group">
-            <label>Votre message</label>
-            <textarea name="message" placeholder="Décrivez votre commerce et ce que vous recherchez..."></textarea>
-          </div>
-          <button type="submit" class="form-submit">Envoyer ma demande →</button>
-          <div id="form-success">✓ Message envoyé — je vous recontacte sous 24h !</div>
-        </form>
+        </div>
+      </a>
+      <!-- PLACEHOLDER 2 -->
+      <div class="trophy-card trophy-placeholder">
+        <div class="placeholder-inner">
+          <div class="placeholder-num">02</div>
+          <div class="placeholder-line"></div>
+          <div class="placeholder-label">Prochaine réalisation</div>
+          <div class="placeholder-desc">Le prochain commerce qui<br>prend sa place sur internet.</div>
+        </div>
       </div>
+
+      <!-- PLACEHOLDER 3 -->
+      <div class="trophy-card trophy-placeholder">
+        <div class="placeholder-inner">
+          <div class="placeholder-num">03</div>
+          <div class="placeholder-line"></div>
+          <div class="placeholder-label">En cours</div>
+          <div class="placeholder-desc">Votre site pourrait<br>être ici.</div>
+        </div>
+      </div>
+
     </div>
   </div>
-</section>
 
-<!-- ===================== FOOTER ===================== -->
-<footer>
-  <div class="footer-logo">ClarkWeb</div>
-  <p class="footer-copy">© 2025 Gilles Ballester — Tous droits réservés</p>
-  <p class="footer-location">France entière</p>
-</footer>
+<div class="stat-label">Sur mesure</div></div>
+  </div>
+
+  </div><!-- end view-portfolio -->
+
 
 <script>
+  // ── VIEW SYSTEM
+  function showView(name) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    const target = document.getElementById('view-' + name);
+    target.classList.add('active');
+    target.classList.add('view-transition');
+    setTimeout(() => target.classList.remove('view-transition'), 500);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // Nav adapt
+    const mainLinks = document.getElementById('nav-main-links');
+    const backBtn   = document.getElementById('nav-back-btn');
+    if (name === 'portfolio') {
+      mainLinks.style.display = 'none';
+      backBtn.style.display = 'block';
+    } else {
+      mainLinks.style.display = 'flex';
+      backBtn.style.display = 'none';
+    }
 
-  // Intro screen
+    // Update counters
+    if (name === 'portfolio') {
+      const realCards = document.querySelectorAll('.trophy-card:not(.trophy-placeholder)').length;
+      const padded = String(realCards).padStart(2, '0');
+      
+      
+    }
+  }
+
+  // ── INTRO
   window.addEventListener('load', () => {
     setTimeout(() => {
       const intro = document.getElementById('intro');
       const span = intro.querySelector('.intro-title span');
       const line = intro.querySelector('.intro-line');
-      // Slide text out first
       span.classList.add('exit');
       if (line) line.style.opacity = '0';
-      // Then fade the whole intro
       setTimeout(() => {
         intro.classList.add('hide');
         intro.addEventListener('animationend', () => {
@@ -1413,67 +1088,37 @@
     }, 1200);
   });
 
-  // Nav scroll effect
+  // ── NAV SCROLL
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('nav');
-    if (window.scrollY > 20) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Scroll reveal
+  // ── SCROLL REVEAL
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Modal maintenance
+  // ── MODAL MAINTENANCE
   const modal = document.getElementById('maintenanceModal');
-  document.getElementById('maintenanceLink').addEventListener('click', e => {
-    e.preventDefault();
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  });
-  document.getElementById('modalClose').addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  });
-  document.getElementById('modalCta').addEventListener('click', () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  });
-  modal.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  });
+  document.getElementById('maintenanceLink').addEventListener('click', e => { e.preventDefault(); modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; });
+  document.getElementById('modalClose').addEventListener('click', () => { modal.style.display = 'none'; document.body.style.overflow = ''; });
+  document.getElementById('modalCta').addEventListener('click', () => { modal.style.display = 'none'; document.body.style.overflow = ''; });
+  modal.addEventListener('click', e => { if (e.target === modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } });
 
-
+  // ── FORM
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const form = this;
-    const data = new FormData(form);
+    const data = new FormData(this);
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await fetch(this.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
       if (res.ok) {
         document.getElementById('form-success').style.display = 'block';
-        form.reset();
-        setTimeout(() => {
-          document.getElementById('form-success').style.display = 'none';
-        }, 5000);
+        this.reset();
+        setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
       }
-    } catch(err) {
-      console.error(err);
-    }
+    } catch(err) { console.error(err); }
   });
 </script>
 </body>
