@@ -906,7 +906,7 @@
         <div>
           <p class="contact-info-title">Coordonnées directes</p>
           <div class="contact-line"><div class="contact-icon">☎</div><div class="contact-detail"><strong>Téléphone</strong><span><a href="tel:+33784417294">07 84 41 72 94</a></span></div></div>
-          <div class="contact-line"><div class="contact-icon">✉</div><div class="contact-detail"><strong>Email</strong><span><a href="mailto:clarkwebagence@gmail.com">clarkwebagence@gmail.com</a></span></div></div>
+          <div class="contact-line"><div class="contact-icon">✉</div><div class="contact-detail"><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection#8ae9e6ebf8e1fdefe8ebedefe4e9efcaede7ebe3e6a4e9e5e7"><span class="__cf_email__" data-cfemail="9bf8f7fae9f0ecfef9fafcfef5f8fedbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span></a></span></div></div>
           <div class="contact-line"><div class="contact-icon">⌖</div><div class="contact-detail"><strong>Zone d'intervention</strong><span>France entière — visio ou sur place</span></div></div>
           <p class="contact-note">Vous pouvez me contacter directement par téléphone ou par email. Je réponds sous 24h maximum.</p>
         </div>
@@ -1067,7 +1067,7 @@
   </div><!-- end view-portfolio -->
 
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── VIEW SYSTEM
   function showView(name) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -1142,12 +1142,56 @@
     try {
       const res = await fetch(this.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
       if (res.ok) {
-        document.getElementById('form-success').style.display = 'block';
-        this.reset();
-        setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        alert('Erreur lors de l\'envoi. Réessayez.');
       }
-    } catch(err) { console.error(err); }
+    } catch(err) {
+      console.error(err);
+    }
   });
+
 </script>
+
+<!-- BANNIÈRE COOKIES -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#111110;border-top:1px solid rgba(240,237,232,0.12);padding:18px 40px;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+  <p style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:#b8b2a8;line-height:1.6;max-width:680px;">
+    Ce site utilise Google Analytics pour mesurer l'audience et améliorer l'expérience. Vos données restent anonymisées.
+  </p>
+  <div style="display:flex;gap:12px;flex-shrink:0;">
+    <button id="cookieRefuse" style="padding:10px 22px;background:none;border:1px solid rgba(240,237,232,0.2);color:#b8b2a8;font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;">Refuser</button>
+    <button id="cookieAccept" style="padding:10px 22px;background:#f0ede8;border:none;color:#111110;font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;">Accepter</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function setCookie(name, val, days) {
+      var d = new Date();
+      d.setTime(d.getTime() + days*24*60*60*1000);
+      document.cookie = name+'='+val+';expires='+d.toUTCString()+';path=/';
+    }
+    function getCookie(name) {
+      var v = document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');
+      return v ? v.pop() : null;
+    }
+    var banner = document.getElementById('cookieBanner');
+    if (!getCookie('cw_cookies')) {
+      banner.style.display = 'flex';
+    }
+    document.getElementById('cookieAccept').onclick = function() {
+      setCookie('cw_cookies', 'accepted', 365);
+      window['ga-disable-G-5GQK97VKBE'] = false;
+      banner.style.display = 'none';
+    };
+    document.getElementById('cookieRefuse').onclick = function() {
+      setCookie('cw_cookies', 'refused', 365);
+      window['ga-disable-G-5GQK97VKBE'] = true;
+      banner.style.display = 'none';
+    };
+  })();
+</script>
+
 </body>
 </html>
